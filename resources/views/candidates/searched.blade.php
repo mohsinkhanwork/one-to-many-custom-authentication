@@ -63,7 +63,7 @@
 
 </div>
 	
-    <div style="display: flex;">
+   {{--  <div style="display: flex;">
 <div style="width: 50%;text-align: right;margin-right: 10%;">
     <h1>Party Name</h1>
     @isset($candidate_id)
@@ -82,7 +82,7 @@
     @endforeach
     @endisset
 </div>
-</div>
+</div> --}}
 
 @if( Session::has('success'))
   <div class="alert alert-success">
@@ -102,6 +102,7 @@
     <th>#</th>
     <th>Candidate Name</th>
     <th>Candidate ID</th>
+    <th>Party</th>
     <th>Action</th>
     
 
@@ -115,6 +116,7 @@
             <td>{{$i}}</td> 
             <td>{{$candidate_idd->name}}</td>
             <td>{{$candidate_idd->candidate_id}}</td>
+            <td>{{$candidate_idd->Party->name}}</td>
             
             <td>
 

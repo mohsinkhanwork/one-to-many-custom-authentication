@@ -99,7 +99,7 @@
 <div class="topnav">
  <div class="search-container">
     <form action="{{ route('candidate.searchCanId') }}" method="post"> @csrf
-      <input type="search" placeholder="Enter Full Name of Candidate" name="q" required="true">
+      <input type="search" placeholder="Search all candidates" name="q" required="true">
       <button type="submit"> Search </button>
     </form>
   </div>
