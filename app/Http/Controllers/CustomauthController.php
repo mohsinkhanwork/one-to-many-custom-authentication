@@ -58,11 +58,9 @@ class CustomauthController extends Controller
 		// dd($data);
 		$check = $this->create($data);
 
-		Auth::check();
-
-		return view('customAuth.Success');
+		Auth::loginUsingId($check->id);
 		
-
+		return Redirect::to('/party');
 		// return redirect()->intended('dashboard')->withSuccess('Signed in');	
 	}
 

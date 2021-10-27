@@ -292,9 +292,20 @@ $(".deleteRecord").click(function(){
 </table>
 
 
+@elseif(auth()->user()->role == 'user') 
+
+
+
+<div>
+  hello user
+</div>
+
+
+
+
+
+
 @endif
-
-
 
 
 @endsection
