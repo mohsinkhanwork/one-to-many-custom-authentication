@@ -69,7 +69,10 @@ class CandidateController extends Controller
     {
         $party = Party::find($id);
         // dd($party);
-        return view('candidates.create', compact('party'));
+         $user_vote = User::query()->with('candidate')->where('id', auth()->user()->id)->first();
+         // dd($user_vote);
+
+        return view('candidates.create', compact('party', 'user_vote'));
     }
 
 
@@ -95,7 +98,11 @@ class CandidateController extends Controller
         'user_id' =>$request['user_id']
     ]);
 
-        return redirect()->route('candidate.can_index',[$request->party_id])->with('success', 'Vote Casted successfully');      //for success message the redirect should be used
+        // dd($product);
+
+        return response()->json();
+
+        // return redirect()->route('candidate.can_index',[$request->party_id])->with('success', 'Vote Casted successfully');      //for success message the redirect should be used
 
 
 
