@@ -88,6 +88,8 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 
 @if(auth()->user()->role == 'admin')
 
@@ -295,7 +297,8 @@ window.onclick = function(event) {
     <th>#</th>
     <th>Your Name</th>
     <th>Candidate ID</th>
-    <th>Action</th>
+    <th>Delete ? </th>
+    <th>Show Details </th>
     
 
 </thead>
@@ -310,16 +313,34 @@ window.onclick = function(event) {
             
             <td>
 
-        
-                <a href="{{ url('/request-for-deletion/'. $user_candidates_only->candidate_id) }}">Request Deleteion</a>
-                | <a href="{{ route('candidate.show', [$user_candidates_only->id])}}"><i class="fas fa-eye"></i></a>
+            <div class="delete_html_data">
+              
+            </div>
 
+          @if($user_candidates_only->delete_request)      
+          <div>
+                    <b>You have already Sent a Delete request to Administration. Thank You </b>
+          </div>
+          
+          @else 
+          <button class="delete_request btn btn-danger" data-id="{{ $user_candidates_only->candidate_id }}" id> Request Deletion </button>
+          
 
-
+          @endif
              </td> 
+
+             <td>
+                
+                <a href="{{ route('candidate.show', [$user_candidates_only->id])}}"><i class="fas fa-eye"></i></a>
+               
+             </td>
+
+
+
         </tr>
 @endif
- @php $i++; @endphp
+
+@php $i++; @endphp
 
   
 </tbody>
@@ -328,9 +349,59 @@ window.onclick = function(event) {
 
 </div>
 
+<script type="text/javascript">
+    
+$(".delete_request").click(function(){
+
+    var id = $(this).data("id");
+    var token = $("meta[name='csrf-token']").attr("content");
+
+      swal({
+                      title: "Wait..!",
+                      text: "Are You sure, You want to send delete Request ?",
+                      icon: "warning",
+                      buttons: true,
+                      dangerMode: true,
+                    }).then((willDelete) => {
+
+                        if (willDelete) {
+    $.ajax({
+        url: "/request-for-deletion/"+id,
+        type: 'GET',
+        data: {
+            "id": id,
+            "_token": token,
+        },
+        success: function (){
+
+                 swal({
+                      title: "Good job!",
+                      text: "Request Sent SuccessFully!",
+                      icon: "success",
+                      button: "Ok",
+                    });
+
+                 document.getElementsByClassName("delete_request")[0].style.display = 'none';
+                 $('.delete_html_data').html('<b>You have Successfully Sent a Delete request to Administration. Thank You </b>');
+
+        },
+        error: function() {
+
+            alert('error');
+        },
+    });
+      
+       } else {
+
+             swal(" Request did not send. Thank You ");
+       }
+});
+   
+});
+
+</script>
+
 
 @endif
-
-
 @endsection
 

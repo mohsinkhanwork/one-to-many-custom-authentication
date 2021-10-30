@@ -114,7 +114,7 @@ $(document).ready(function(){
                          var err = JSON.parse(xhr.responseText);
                          // alert(err);
  
-                        if(err.errors.candidate_id != null ){               //name error is null
+                        if(err.errors.candidate_id != null ){               //means error
 
                             var swal = JSON.stringify(err.errors.candidate_id).replace(/[\[\]"]+/g, '');
 

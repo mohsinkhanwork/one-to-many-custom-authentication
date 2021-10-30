@@ -36,17 +36,24 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 
 
 // party controller
+Route::group(['middleware' => 'auth'], function() {
+
 
 Route::resource('/party', 'PartyController');
-
 Route::get('party_candidate_Apis', 'apiController@index')->name('api.index');
 Route::delete('delete_party/{id}','PartyController@deleteParty');
 
+
+});
+
+//
 
 //end party controller
 
 // CandidateController
 
+Route::group(['middleware' => 'auth'], function() {
+    
 Route::resource('/candidate', 'CandidateController');
 Route::get('/CreateCandidate/{partyID}', 'CandidateController@CreateCandidate')->name('candidate.CreateCandidate');
 Route::get('/candidateIndex/{partyID}', 'CandidateController@can_index')->name('candidate.can_index');
@@ -54,6 +61,10 @@ Route::get('/EditCandidate/{CanID}/PartyID/{PartID}', 'CandidateController@can_e
 Route::get('/request-for-deletion/{candidate_id}', 'CandidateController@deleteRequest')->name('candidate.deleteRequest');
 Route::post('/searchCandidateID/', 'CandidateController@searchCanId')->name('candidate.searchCanId');
 Route::delete('delete_candidate/{id}','CandidateController@deleteCandidate');
+
+    
+});
+
 
 
 // end CandidateController

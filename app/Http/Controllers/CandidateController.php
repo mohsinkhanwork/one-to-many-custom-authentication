@@ -35,7 +35,7 @@ class CandidateController extends Controller
         ])->first();
 
 
-        // dd($user_candidate_only);
+        // dd($user_candidates_only->delete_request);
 
          $candidate_delete_request = Candidate::with('Party')->whereNotNull('delete_request')->get()->all();
         // dd($candidate_delete_request);
@@ -190,12 +190,17 @@ class CandidateController extends Controller
 
         $delet_request = Candidate::query()->where('candidate_id', $candidate_id);
 
+        $name = Candidate::query()->where('candidate_id', $candidate_id)->first();
+
+        // dd($name->name);
+
         $delet_request->update([
 
-            'delete_request' => 'Please Delete My vote with ID '. $candidate_id,
+            'delete_request' => 'Please Delete My vote with ID :'. $candidate_id . ' and my Name is: '. $name->name
         ]);
 
-        return back()->with('success', 'Request sent successfully');
+        return response()->json();
+        // return back()->with('success', 'Request sent successfully');
     }
 
 
