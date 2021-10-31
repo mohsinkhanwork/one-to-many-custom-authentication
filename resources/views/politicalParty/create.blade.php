@@ -15,10 +15,27 @@
         @csrf
 
             <div class="form-group">
-                <label>Party Name</label>
+                <label>Party Name: </label>
                 <input type="text" class="form-control" name="name" >
 
             </div>
+
+            <div class="form-group">
+                <label>Select Your Party Leader: </label>
+
+                <select class="form-control" name="party_leader">
+   
+              <option></option>
+                
+                <option value="imran khan" value="imran khan"> Imran Khan </option>
+                <option value="Bilawal" value="Bilawal"> Bilawal </option>
+                <option value="nawaz shareef" value="nawaz shareef"> nawaz shareef </option>
+            
+                </select>
+
+            </div>
+
+
 
             <div class="form-group">
                 <label>Add Party Logo</label>
@@ -68,9 +85,9 @@ $(document).ready(function(){
 
                          var err = JSON.parse(xhr.responseText);
  
-                        if(err.errors.name == null ){               //name error is null
+                        if(err.errors.name != null ){               //name error exists
 
-                            var swal1 = JSON.stringify(err.errors.party_logo).replace(/[\[\]"]+/g, '');
+                            var swal1 = JSON.stringify(err.errors.name).replace(/[\[\]"]+/g, '');
 
                              swal({
                       title: "Sorry..!",
@@ -79,9 +96,9 @@ $(document).ready(function(){
                       button: "OK",
                       dangerMode: true,
                     });
-                        } else if(err.errors.party_logo == null ){               //party logo error is null
+                        } else if(err.errors.party_leader != null ){               //party logo error exists
 
-                           var swal2 = JSON.stringify(err.errors.name).replace(/[\[\]"]+/g, '');
+                           var swal2 = JSON.stringify(err.errors.party_leader).replace(/[\[\]"]+/g, '');
                              swal({
                       title: "Sorry..!",
                       text: swal2,
@@ -89,12 +106,9 @@ $(document).ready(function(){
                       button: "OK",
                       dangerMode: true,
                     });
-                        }
+                        } else if(err.errors.party_logo != null){               //party logo error exsists
 
-                        else {                                      //all fields have errors.
-
-                             var swal3 = JSON.stringify(err.errors.name + " and " + err.errors.party_logo ).replace(/[\[\]"]+/g, '');
-
+                           var swal3 = JSON.stringify(err.errors.party_logo).replace(/[\[\]"]+/g, '');
                              swal({
                       title: "Sorry..!",
                       text: swal3,
@@ -102,9 +116,8 @@ $(document).ready(function(){
                       button: "OK",
                       dangerMode: true,
                     });
-                             
-                    }
                 }
+            },
         });
     });
 });

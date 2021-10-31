@@ -323,9 +323,9 @@ window.onclick = function(event) {
           </div>
           
           @else 
+
           <button class="delete_request btn btn-danger" data-id="{{ $user_candidates_only->candidate_id }}" id> Request Deletion </button>
           
-
           @endif
              </td> 
 

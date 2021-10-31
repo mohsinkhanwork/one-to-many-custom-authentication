@@ -2,65 +2,7 @@
 
 @section('content')
 
-
-<style>
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  width: 456px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown .badge {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  padding: 5px 10px;
-  border-radius: 50%;
-  background-color: red;
-  color: white;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown a:hover {
-    background-color: #ddd;
-}
-
-.show {
-    display: block;
-}
-</style>
-
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
      
 
 
@@ -124,24 +66,43 @@
 <thead>
     <th>Party Name</th>
     <th>Party Logo</th>
+    <th>Party Leader</th>
     <th>Candidates</th>
+    <th> Publish </th>
     <th>Action</th>
 
 
 </thead>
 <tbody>
 
-    @foreach($parties as $party)
+    @foreach($parties as $key => $party)
         <tr>
             <td>{{$party->name}}</td>
             <td><img src="{{ asset('party_logo/'. $party->party_logo) }}" alt="image" width="100" height="100"></td>
+            <td>
+                {{$party->party_leader}}
+            </td>
             <td>
                 <a class="btn btn-primary" href="{{route('candidate.can_index', [$party->id])}}"> Show Candidates </a>
 
             </td>
             <td>
+                {{-- <span>
 
-
+                <i class="fas fa-toggle-on fa-3x" style="color: blue;"></i>
+                    
+                </span>
+                <span>
+                <i class="fas fa-toggle-off fa-3x" style="color: black;"></i>
+                    
+                </span> --}}
+                <label class="switch">
+                  <input id="on_off{{$key}}" type="checkbox" name="publish_party">
+                  <div class="slider"></div>
+                </label>
+                <p id="info{{$key}}"></p>
+            </td>
+            <td>
           
                 <a href="{{ route('party.edit', [$party->id])}}"><i class="fas fa-edit"></i></a>
                 <a href="{{ route('party.show', [$party->id])}}"><i class="fas fa-eye"></i></a>
@@ -223,7 +184,7 @@ $(".deleteRecord").click(function(){
         },
         error: function() {
 
-            alert('error');
+            alert('error, Please Refresh the page');
         },
     });
       
@@ -236,6 +197,55 @@ $(".deleteRecord").click(function(){
 });
 
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#on_off0').on('change',function(e){
+    e.preventDefault();
+
+    var publish_party = $('#on_off0').val();
+
+        if(this.checked){
+            $("#info0").text("U checked me, place some code here, 1st id");
+            console.log(publish_party);
+        }
+        else{
+            $("#info0").text("U unchecked me, another piece of code here");
+            alert('off')
+        }
+    });
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#on_off1').on('change',function(e){
+    e.preventDefault();
+        if(this.checked){
+            $("#info1").text("U checked me, place some code here, 2nd id");
+        }
+        else{
+            $("#info1").text("U unchecked me, another piece of code here");
+        }
+    });
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#on_off2').on('change',function(e){
+    e.preventDefault();
+        if(this.checked){
+            $("#info2").text("U checked me, place some code here, 3rd id");
+        }
+        else{
+            $("#info2").text("U unchecked me, another piece of code here");
+        }
+    });
+});
+</script>
+
+
 
 
 

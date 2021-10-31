@@ -58,6 +58,7 @@ class PartyController extends Controller
         $validated = $request->validate([
         'name' => 'required|unique:parties',
         'party_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'party_leader' => 'required',
       ]);
 
         if ($validated) {
@@ -69,6 +70,7 @@ class PartyController extends Controller
         $party = new Party;
         $party->name = $request->name;
         $party->party_logo = $input['party_logo'];
+        $party->party_leader = $request->party_leader;
         
         $party->save();
 
