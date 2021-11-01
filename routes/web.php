@@ -32,6 +32,7 @@ Route::post('custom-registration', [CustomAuthController::class, 'customRegistra
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
 
+
 //end custome auth controller
 
 
@@ -42,6 +43,8 @@ Route::group(['middleware' => 'auth'], function() {
 Route::resource('/party', 'PartyController');
 Route::get('party_candidate_Apis', 'apiController@index')->name('api.index');
 Route::delete('delete_party/{id}','PartyController@deleteParty');
+Route::get('/publish/party/{id}', 'PartyController@publish')->name('publish');
+Route::get('/un_publish/party/{id}', 'PartyController@un_publish')->name('un_publish');
 
 
 });

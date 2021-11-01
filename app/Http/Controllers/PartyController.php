@@ -25,9 +25,13 @@ class PartyController extends Controller
         $parties = Party::with('candidate')->get();
         // dd($parties);
 
+        $publish_parties = Party::where('publish', 1)->get();
+
+        // dd($publish_parties);
+
         $candidate_delete_request_Noti = Candidate::with('Party')->whereNotNull('delete_request')->get()->all();
         // dd($candidate_delete_request_Noti);
-        return view('politicalParty.index', compact('parties', 'candidate_delete_request_Noti'));
+        return view('politicalParty.index', compact('parties', 'candidate_delete_request_Noti', 'publish_parties'));
         
         // $candidate = $party->candidate;
 
@@ -198,6 +202,30 @@ class PartyController extends Controller
 
 
     }
+
+    public function publish($id) {
+
+        // dd($id);
+
+        $publish = Party::where('id', $id)->update(['publish' => '1']);
+
+        // dd($publish);
+
+        return response()->json();
+    }
+
+        public function un_publish($id) {
+
+        // dd($id);
+
+        $publish = Party::where('id', $id)->update(['publish' => '0']);
+
+        // dd($publish);
+
+        return response()->json();
+    }
+
+    
 
 
 

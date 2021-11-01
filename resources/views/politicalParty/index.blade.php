@@ -97,7 +97,7 @@
                     
                 </span> --}}
                 <label class="switch">
-                  <input id="on_off{{$key}}" type="checkbox" name="publish_party">
+                  <input id="on_off{{$key}}" type="checkbox" name="publish" value="{{$party->id}}">
                   <div class="slider"></div>
                 </label>
                 <p id="info{{$key}}"></p>
@@ -120,6 +120,239 @@
 </tbody>
 
 </table>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#on_off0 ').on('change',function(e){
+
+    e.preventDefault();
+
+     $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+    var publish = $('#on_off0').val();
+
+        if(this.checked){
+
+            $.ajax({
+
+                  url: "publish/party/"+publish,
+                  type: 'GET',
+                  data: {
+
+                    "publish": publish,
+                  },
+                  success: function(data) {
+
+                     swal({
+                      title: "Good job!",
+                      text: "Party published Successfully!",
+                      icon: "success",
+                      button: "Ok",
+                    });
+                  },
+
+                  error: function(data) {
+
+                    alert('error');
+                  },
+
+            });
+
+            // $("#info0").text("U checked me, place some code here, 1st id");
+        }
+        else{
+            
+            $.ajax({
+
+                  url: "un_publish/party/"+publish,
+                  type: 'GET',
+                  data: {
+
+                    "publish": publish,
+                  },
+                  success: function(data) {
+
+                     swal({
+                      title: "Good job!",
+                      text: "Party Un published Successfully!",
+                      icon: "success",
+                      button: "Ok",
+                    });
+                  },
+
+                  error: function(data) {
+
+                    alert('error');
+                  },
+
+            });
+
+            // $("#info0").text("U unchecked me, another piece of code here");
+         
+        }
+    });
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#on_off1 ').on('change',function(e){
+
+    e.preventDefault();
+
+     $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+    var publish = $('#on_off1').val();
+
+        if(this.checked){
+
+            $.ajax({
+
+                  url: "publish/party/"+publish,
+                  type: 'GET',
+                  data: {
+
+                    "publish": publish,
+                  },
+                  success: function(data) {
+
+                     swal({
+                      title: "Good job!",
+                      text: "Party published Successfully!",
+                      icon: "success",
+                      button: "Ok",
+                    });
+
+                  },
+
+                  error: function(data) {
+
+                    alert('error');
+                  },
+
+            });
+
+            // $("#info0").text("U checked me, place some code here, 1st id");
+        } else {
+
+                 $.ajax({
+
+                  url: "un_publish/party/"+publish,
+                  type: 'GET',
+                  data: {
+
+                    "publish": publish,
+                  },
+                  success: function(data) {
+
+                     swal({
+                      title: "Good job!",
+                      text: "Party Un published Successfully!",
+                      icon: "success",
+                      button: "Ok",
+                    });
+                  },
+
+                  error: function(data) {
+
+                    alert('error');
+                  },
+
+            });
+
+            // $("#info1").text("U unchecked me, another piece of code here");
+
+        }
+    });
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#on_off2 ').on('change',function(e){
+
+    e.preventDefault();
+
+     $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+    var publish = $('#on_off2').val();
+
+        if(this.checked){
+
+            $.ajax({
+
+                  url: "publish/party/"+publish,
+                  type: 'GET',
+                  data: {
+
+                    "publish": publish,
+                  },
+                  success: function(data) {
+
+                     swal({
+                      title: "Good job!",
+                      text: "Party published Successfully!",
+                      icon: "success",
+                      button: "Ok",
+                    });
+                  },
+
+                  error: function(data) {
+
+                    alert('error');
+                  },
+
+            });
+
+            // $("#info0").text("U checked me, place some code here, 1st id");
+        }
+        else{
+            
+             $.ajax({
+
+                  url: "un_publish/party/"+publish,
+                  type: 'GET',
+                  data: {
+
+                    "publish": publish,
+                  },
+                  success: function(data) {
+
+                     swal({
+                      title: "Good job!",
+                      text: "Party Un published Successfully!",
+                      icon: "success",
+                      button: "Ok",
+                    });
+                  },
+
+                  error: function(data) {
+
+                    alert('error');
+                  },
+
+            });
+
+            // $("#info2").text("U unchecked me, another piece of code here");
+           
+        }
+    });
+});
+</script>
+
+
+
 
 <script>
 /* When the user clicks on the button, 
@@ -198,52 +431,7 @@ $(".deleteRecord").click(function(){
 
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-    $('#on_off0').on('change',function(e){
-    e.preventDefault();
 
-    var publish_party = $('#on_off0').val();
-
-        if(this.checked){
-            $("#info0").text("U checked me, place some code here, 1st id");
-            console.log(publish_party);
-        }
-        else{
-            $("#info0").text("U unchecked me, another piece of code here");
-            alert('off')
-        }
-    });
-});
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-    $('#on_off1').on('change',function(e){
-    e.preventDefault();
-        if(this.checked){
-            $("#info1").text("U checked me, place some code here, 2nd id");
-        }
-        else{
-            $("#info1").text("U unchecked me, another piece of code here");
-        }
-    });
-});
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-    $('#on_off2').on('change',function(e){
-    e.preventDefault();
-        if(this.checked){
-            $("#info2").text("U checked me, place some code here, 3rd id");
-        }
-        else{
-            $("#info2").text("U unchecked me, another piece of code here");
-        }
-    });
-});
-</script>
 
 
 
@@ -281,14 +469,14 @@ $(".deleteRecord").click(function(){
 </thead>
 <tbody>
 
-    @foreach($parties as $party)
+    @foreach($publish_parties as $publish_party)
         <tr>
-            <td>{{$party->name}}</td>
-            <td><img src="{{ asset('party_logo/'. $party->party_logo) }}" alt="image" width="100" height="100"></td>
-            <td><a class="btn btn-primary" href="{{route('candidate.can_index', [$party->id])}}"> Cast Vote </a></td>
+            <td>{{$publish_party->name}}</td>
+            <td><img src="{{ asset('party_logo/'. $publish_party->party_logo) }}" alt="image" width="100" height="100"></td>
+            <td><a class="btn btn-primary" href="{{route('candidate.can_index', [$publish_party->id])}}"> Cast Vote </a></td>
             <td>
 
-                <a href="{{ route('party.show', [$party->id])}}"><i class="fas fa-eye"></i></a>
+                <a href="{{ route('party.show', [$publish_party->id])}}"><i class="fas fa-eye"></i></a>
 
             
 

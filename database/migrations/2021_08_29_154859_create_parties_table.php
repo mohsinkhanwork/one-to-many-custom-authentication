@@ -18,6 +18,8 @@ class CreatePartiesTable extends Migration
             $table->string('name')->nullable();
             $table->string('party_logo')->nullable();
             $table->string('party_leader')->nullable();
+            // $table->string('publish')->nullable();
+            $table->integer('publish')->unsigned()->nullable()->default(0);         //can never be negative
             $table->timestamps();
         });  
     }
