@@ -96,11 +96,10 @@
                 <i class="fas fa-toggle-off fa-3x" style="color: black;"></i>
                     
                 </span> --}}
-                <label class="switch">
-                  <input id="on_off{{$key}}" type="checkbox" name="publish" value="{{$party->id}}">
-                  <div class="slider"></div>
-                </label>
-                <p id="info{{$key}}"></p>
+
+<input data-id="{{$party->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $party->publish ? 'checked' : '' }}>
+                     
+
             </td>
             <td>
           
@@ -120,235 +119,57 @@
 </tbody>
 
 </table>
+
+
 <script type="text/javascript">
-    $(document).ready(function(){
-    $('#on_off0 ').on('change',function(e){
-
-    e.preventDefault();
-
-     $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-    var publish = $('#on_off0').val();
-
-        if(this.checked){
-
-            $.ajax({
-
-                  url: "publish/party/"+publish,
-                  type: 'GET',
-                  data: {
-
-                    "publish": publish,
-                  },
-                  success: function(data) {
-
-                     swal({
-                      title: "Good job!",
-                      text: "Party published Successfully!",
-                      icon: "success",
-                      button: "Ok",
-                    });
-                  },
-
-                  error: function(data) {
-
-                    alert('error');
-                  },
-
-            });
-
-            // $("#info0").text("U checked me, place some code here, 1st id");
-        }
-        else{
-            
-            $.ajax({
-
-                  url: "un_publish/party/"+publish,
-                  type: 'GET',
-                  data: {
-
-                    "publish": publish,
-                  },
-                  success: function(data) {
-
-                     swal({
-                      title: "Good job!",
-                      text: "Party Un published Successfully!",
-                      icon: "success",
-                      button: "Ok",
-                    });
-                  },
-
-                  error: function(data) {
-
-                    alert('error');
-                  },
-
-            });
-
-            // $("#info0").text("U unchecked me, another piece of code here");
+    
+    $(function() {
+    $('.toggle-class').change(function() {
+        var publish = $(this).prop('checked') == true ? 1 : 0; 
+        var party_id = $(this).data('id'); 
          
-        }
-    });
-});
-</script>
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/publish_party/',
+            data: {'publish': publish, 'party_id': party_id},
+            success: function(data){
+              
+              // alert('suuceess');
 
-<script type="text/javascript">
-    $(document).ready(function(){
-    $('#on_off1 ').on('change',function(e){
+              if(publish == 1) {
 
-    e.preventDefault();
-
-     $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-    var publish = $('#on_off1').val();
-
-        if(this.checked){
-
-            $.ajax({
-
-                  url: "publish/party/"+publish,
-                  type: 'GET',
-                  data: {
-
-                    "publish": publish,
-                  },
-                  success: function(data) {
-
-                     swal({
+                swal({
                       title: "Good job!",
                       text: "Party published Successfully!",
                       icon: "success",
                       button: "Ok",
                     });
 
-                  },
+              } else {
 
-                  error: function(data) {
-
-                    alert('error');
-                  },
-
-            });
-
-            // $("#info0").text("U checked me, place some code here, 1st id");
-        } else {
-
-                 $.ajax({
-
-                  url: "un_publish/party/"+publish,
-                  type: 'GET',
-                  data: {
-
-                    "publish": publish,
-                  },
-                  success: function(data) {
-
-                     swal({
-                      title: "Good job!",
+                swal({
+                      title: "success!",
                       text: "Party Un published Successfully!",
-                      icon: "success",
+                      icon: "warning",
                       button: "Ok",
                     });
-                  },
 
-                  error: function(data) {
+              }
+                
+            },
 
-                    alert('error');
-                  },
+            error: function(data) {
 
-            });
+                alert('error');
 
-            // $("#info1").text("U unchecked me, another piece of code here");
-
-        }
-    });
-});
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-    $('#on_off2 ').on('change',function(e){
-
-    e.preventDefault();
-
-     $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+            },
         });
+    })
+  })
 
-    var publish = $('#on_off2').val();
 
-        if(this.checked){
 
-            $.ajax({
-
-                  url: "publish/party/"+publish,
-                  type: 'GET',
-                  data: {
-
-                    "publish": publish,
-                  },
-                  success: function(data) {
-
-                     swal({
-                      title: "Good job!",
-                      text: "Party published Successfully!",
-                      icon: "success",
-                      button: "Ok",
-                    });
-                  },
-
-                  error: function(data) {
-
-                    alert('error');
-                  },
-
-            });
-
-            // $("#info0").text("U checked me, place some code here, 1st id");
-        }
-        else{
-            
-             $.ajax({
-
-                  url: "un_publish/party/"+publish,
-                  type: 'GET',
-                  data: {
-
-                    "publish": publish,
-                  },
-                  success: function(data) {
-
-                     swal({
-                      title: "Good job!",
-                      text: "Party Un published Successfully!",
-                      icon: "success",
-                      button: "Ok",
-                    });
-                  },
-
-                  error: function(data) {
-
-                    alert('error');
-                  },
-
-            });
-
-            // $("#info2").text("U unchecked me, another piece of code here");
-           
-        }
-    });
-});
 </script>
 
 
@@ -462,6 +283,7 @@ $(".deleteRecord").click(function(){
 <thead>
     <th> Party Name</th>
     <th> Party Logo</th>
+    <th> Party Leader </th>
     <th> Cast Your vote </th>
     <th> See Party Details </th>
 
@@ -473,13 +295,13 @@ $(".deleteRecord").click(function(){
         <tr>
             <td>{{$publish_party->name}}</td>
             <td><img src="{{ asset('party_logo/'. $publish_party->party_logo) }}" alt="image" width="100" height="100"></td>
+            <td>{{$publish_party->party_leader}}</td>
             <td><a class="btn btn-primary" href="{{route('candidate.can_index', [$publish_party->id])}}"> Cast Vote </a></td>
             <td>
 
                 <a href="{{ route('party.show', [$publish_party->id])}}"><i class="fas fa-eye"></i></a>
 
-            
-
+        
 
              </td>
         </tr>

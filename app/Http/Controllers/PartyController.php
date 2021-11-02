@@ -203,14 +203,12 @@ class PartyController extends Controller
 
     }
 
-    public function publish($id) {
+    public function publish(Request $request) {
 
-        // dd($id);
-
-        $publish = Party::where('id', $id)->update(['publish' => '1']);
-
-        // dd($publish);
-
+        $user = Party::find($request->party_id);
+        $user->publish = $request->publish;
+        $user->save();
+  
         return response()->json();
     }
 
