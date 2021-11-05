@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Response;
+use Notification;
+use App\Notifications\NewRegiterEmail;
+use Illuminate\Foundation\Auth\RegistersUsers;
+
 
 
 class CustomauthController extends Controller
@@ -59,20 +66,33 @@ class CustomauthController extends Controller
 		$check = $this->create($data);
 
 		Auth::loginUsingId($check->id);
+
+		return response()->json();
 		
-		return Redirect::to('/party');
+		// return Redirect::to('/party');
 		// return redirect()->intended('dashboard')->withSuccess('Signed in');	
 	}
 
 	public function create(array $data)
 	{
-			return User::create([
+		$password = Hash::make($data['password']);
+			// $password = $data['password'];	
+			$user = User::create([
 				'name' => $data['name'],
 				'email' => $data['email'],
-				'password' => Hash::make($data['password']),
+				'password' => $password,
             	'role' => isset($data['role']) ? $data['role'] : 'user'
 
 			]);
+
+				// $email = $data['email'];
+
+				// Notification::route('mail', $email)->notify(new NewRegiterEmail($password));
+			$pass = $data['password'];
+
+			$user->notify(new NewRegiterEmail($pass));
+
+			return $user;
 	}
 
 

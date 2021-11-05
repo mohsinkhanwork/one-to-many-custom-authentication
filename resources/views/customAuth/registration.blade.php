@@ -9,7 +9,7 @@
                     <h3 class="card-header text-center">Register User</h3>
                     <div class="card-body">
 
-                        <form action="{{ route('register.custom') }}" method="POST">
+                        <form id="custom_register" method="POST" action="#">
                             @csrf
                             <div class="form-group mb-3">
                                 <input type="text" placeholder="Name" id="name" class="form-control" name="name"
@@ -60,4 +60,58 @@
         </div>
     </div>
 </main>
+                
+
+
+<script type="text/javascript">
+    
+$(document).ready(function() {
+
+$('#custom_register').on('submit', function(e) {
+            e.preventDefault();
+             var $this = $(this);
+
+            $.ajaxSetup({
+                  headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                  }
+                });
+
+            $.ajax({
+                        type: $this.attr('method'),
+                        url: "{{  route('register.custom')}}",
+                        data: $this.serializeArray(),
+                        dataType: $this.data('type'),
+                        success: function (data) {
+                            // alert('suceess');
+
+                            swal({
+                      title: "Congratulations..!",
+                      text: "Your Password is also sent to your email",
+                      icon: "success",
+                      button: "OK",
+                    }).then((willDelete) => {
+
+                        if (willDelete) {
+                                    
+                            window.location = "{{ url('/party') }}";
+      
+                      }
+                         });
+
+                        },
+                        error: function(data) {
+
+                            alert('error');
+
+                        },
+                    });
+});
+});
+
+</script>
+
+
+
+
 @endsection
