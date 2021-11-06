@@ -100,9 +100,26 @@ $('#custom_register').on('submit', function(e) {
                          });
 
                         },
-                        error: function(data) {
+                        error: function(xhr, status, error) {
 
-                            alert('error');
+                            var err = JSON.parse(xhr.responseText)
+                            // alert('error');
+
+                            if(err.errors.email != null) {
+
+                                var swal1 = JSON.stringify(err.errors.email).replace(/[\[\]"]+/g, '');
+
+                                            swal({
+                                  title: "Sorry..!",
+                                  text: swal1,
+                                  icon: "warning",
+                                  button: "OK",
+                                  dangerMode: true,
+                                });
+                            } else {
+
+                                alert('error_else');
+                            }   
 
                         },
                     });

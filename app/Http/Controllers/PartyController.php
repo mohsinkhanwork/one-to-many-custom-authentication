@@ -210,7 +210,7 @@ class PartyController extends Controller
         $user->save();
   
         return response()->json();
-    }
+     }
 
         public function un_publish($id) {
 
