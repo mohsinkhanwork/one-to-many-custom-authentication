@@ -1,6 +1,28 @@
 @extends('customAuth.dashboard')
 
 @section('content')
+
+<style type="text/css">
+    #page-loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    display: none;
+    text-align: center;
+    width: 100%;
+    padding-top: 25px;
+    background-color: rgba(255, 255, 255, 0.7); 
+    /*background-color: rgba(255, 255, 255, 0.7); */
+}
+</style>
+ <div id="page-loader">
+                            <h3> Loading page... Please wait</h3>
+                            <img src="http://css-tricks.com/examples/PageLoadLightBox/loader.gif" alt="loader">
+                            <p><small> <b> You will be redirected after a while. Thank You</b> </small></p>
+                        </div>
 <main class="signup-form">
     <div class="cotainer">
         <div class="row justify-content-center">
@@ -20,7 +42,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="text" placeholder="Email" id="email_address" class="form-control"
+                                <input type="email" placeholder="Email" id="email_address" class="form-control"
                                     name="email" required autofocus>
                                 @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -53,7 +75,6 @@
                                 <button type="submit" class="btn btn-dark btn-block">Sign up</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -64,6 +85,16 @@
 
 
 <script type="text/javascript">
+
+$( document ).ajaxStart(function() {
+     document.getElementById("page-loader").style.display = 'block';
+    
+    });
+
+$( document ).ajaxStop(function() {
+     document.getElementById("page-loader").style.display = 'none';
+    
+    });
     
 $(document).ready(function() {
 
@@ -76,6 +107,7 @@ $('#custom_register').on('submit', function(e) {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                   }
                 });
+
 
             $.ajax({
                         type: $this.attr('method'),
@@ -99,17 +131,21 @@ $('#custom_register').on('submit', function(e) {
                       }
                          });
 
-                        },
-                        error: function(xhr, status, error) {
+                     },
+                        error: function(xhr) {
 
-                            var err = JSON.parse(xhr.responseText)
-                            // alert('error');
+                            var err = JSON.parse(xhr.responseText);
+
+                            // var status = JSON.parse(xhr.responseText);
+                            // var swal2 = JSON.stringify(status.message).replace(/[\[\]"]+/g, '');
+                            // alert(swal2);
+
 
                             if(err.errors.email != null) {
 
                                 var swal1 = JSON.stringify(err.errors.email).replace(/[\[\]"]+/g, '');
 
-                                            swal({
+                            swal({
                                   title: "Sorry..!",
                                   text: swal1,
                                   icon: "warning",

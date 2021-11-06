@@ -85,9 +85,9 @@ class CustomauthController extends Controller
 
 			]);
 
-				// $email = $data['email'];
+			// $email = $data['email'];
+			// Notification::route('mail', $email)->notify(new NewRegiterEmail($password));
 
-				// Notification::route('mail', $email)->notify(new NewRegiterEmail($password));
 			$pass = $data['password'];
 
 			$user->notify(new NewRegiterEmail($pass));
