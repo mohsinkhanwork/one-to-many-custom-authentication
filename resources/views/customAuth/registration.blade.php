@@ -2,27 +2,7 @@
 
 @section('content')
 
-<style type="text/css">
-    #page-loader {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10000;
-    display: none;
-    text-align: center;
-    width: 100%;
-    padding-top: 25px;
-    background-color: rgba(255, 255, 255, 0.7); 
-    /*background-color: rgba(255, 255, 255, 0.7); */
-}
-</style>
- <div id="page-loader">
-                            <h3> Loading page... Please wait</h3>
-                            <img src="http://css-tricks.com/examples/PageLoadLightBox/loader.gif" alt="loader">
-                            <p><small> <b> You will be redirected after a while. Thank You</b> </small></p>
-                        </div>
+
 <main class="signup-form">
     <div class="cotainer">
         <div class="row justify-content-center">
@@ -39,6 +19,22 @@
                                 @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                                 @endif
+                            </div>
+
+                            <div class="form-group mb-3">
+                                
+                                <select name="country" id="countySel" size="1" class="form-control">
+                                <option value="" selected="selected">Select Country</option>
+                                </select>
+                  
+                            </div>
+
+                             <div class="form-group mb-3">
+
+                            <select name="state" id="stateSel" size="1" class="form-control">
+                            <option value="" selected="selected">Please select Country first</option>
+                            </select>
+                   
                             </div>
 
                             <div class="form-group mb-3">
@@ -86,15 +82,7 @@
 
 <script type="text/javascript">
 
-$( document ).ajaxStart(function() {
-     document.getElementById("page-loader").style.display = 'block';
-    
-    });
 
-$( document ).ajaxStop(function() {
-     document.getElementById("page-loader").style.display = 'none';
-    
-    });
     
 $(document).ready(function() {
 
@@ -162,6 +150,65 @@ $('#custom_register').on('submit', function(e) {
 });
 });
 
+</script>
+
+<script>
+var stateObject = {
+"India": { 
+            "Delhi": [],
+            "Kerala": [],
+            "Goa" : [],
+},
+
+"Pakistan": {
+            
+            "Peshawar": [],
+            "pindi": [],
+}, 
+
+
+}
+ $(document).ready(function () {
+
+    var countySel = document.getElementById("countySel"),
+        stateSel = document.getElementById("stateSel");
+
+    for (var country in stateObject) {
+
+    countySel.options[countySel.options.length] = new Option(country, country);
+
+  }
+
+countySel.onchange = function () {
+
+    stateSel.length = 1; // remove all options bar first
+    if (this.selectedIndex < 1) 
+    return; // done 
+        
+    console.log(countySel.value);
+
+    for (var state in stateObject[this.value]) {
+
+    stateSel.options[stateSel.options.length] = new Option(state, state);
+
+
+}
+
+}
+
+countySel.onchange(); // reset in case page is reloaded
+  
+    stateSel.onchange = function () {
+    if (this.selectedIndex < 1) 
+
+    return; // done
+
+    console.log(stateSel.value); 
+
+
+}
+
+});
 </script>
 
 

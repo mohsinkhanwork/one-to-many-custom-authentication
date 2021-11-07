@@ -14,6 +14,28 @@
 
 </head>
 
+<style type="text/css">
+    #page-loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    display: none;
+    text-align: center;
+    width: 100%;
+    padding-top: 25px;
+    background-color: rgba(255, 255, 255, 0.7); 
+    /*background-color: rgba(255, 255, 255, 0.7); */
+}
+</style>
+ <div id="page-loader">
+                            <h3> Loading page... Please wait</h3>
+                            <img src="http://css-tricks.com/examples/PageLoadLightBox/loader.gif" alt="loader">
+                            <p><small> <b> You will be redirected after a while. Thank You</b> </small></p>
+                        </div>
+
 <body>
 
     <nav class="navbar navbar-light navbar-expand-lg mb-5" style="background-color: #e3f2fd;">
@@ -43,6 +65,18 @@
     </nav>
     
     @yield('content')
+
+<script type="text/javascript">
+    $( document ).ajaxStart(function() {
+     document.getElementById("page-loader").style.display = 'block';
+    
+    });
+
+$( document ).ajaxStop(function() {
+     document.getElementById("page-loader").style.display = 'none';
+    
+    });
+</script>
 
 </body>
 
