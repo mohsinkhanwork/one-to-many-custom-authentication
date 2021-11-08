@@ -62,7 +62,9 @@ class CustomauthController extends Controller
 		]);
 
 		$data = $request->all();
+
 		// dd($data);
+		
 		$check = $this->create($data);
 
 		Auth::loginUsingId($check->id);
@@ -117,6 +119,30 @@ class CustomauthController extends Controller
 
 		return Redirect('login');
 	}
+
+
+	public function update_admin_country(Request $request)
+		{
+
+			$country = $request->country;
+
+			$user = User::where('id', auth()->user()->id)->update(['country' => $country]);
+
+			return response()->json();
+		}
+
+		public function update_admin_state(Request $request)
+		
+		{
+
+			$state = $request->state;
+
+			$user = User::where('id', auth()->user()->id)->update(['state' => $state]);
+
+			return response()->json();
+		}
+
+
 
     
 }

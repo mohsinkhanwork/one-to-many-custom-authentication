@@ -30,6 +30,11 @@ Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name(
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom'); 
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
+Route::post('update_admin_country', [CustomAuthController::class, 'update_admin_country'])->name('update_admin_country');
+Route::post('update_admin_state', [CustomAuthController::class, 'update_admin_state'])->name('update_admin_state');
+
+
+
 
 
 

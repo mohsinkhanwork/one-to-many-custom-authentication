@@ -58,6 +58,22 @@
 
 </div>
 
+                         <div class="form-group mb-3">
+                                
+                                <select name="country" id="countySel" size="1" class="form-control">
+                                <option value="" selected="selected">Select Country</option>
+                                </select>
+                  
+                            </div>
+
+                             <div class="form-group mb-3">
+
+                            <select name="state" id="stateSel" size="1" class="form-control">
+                            <option value="" selected="selected">Please select Country first</option>
+                            </select>
+                   
+                            </div>
+
 
 <table class="table table-sm">
 
@@ -172,7 +188,107 @@
 
 </script>
 
+<script>
+var stateObject = {
+"India": { 
+            "Delhi": [],
+            "Kerala": [],
+            "Goa" : [],
+},
 
+"Pakistan": {
+            
+            "Peshawar": [],
+            "pindi": [],
+}, 
+
+
+}
+ $(document).ready(function () {
+
+    var countySel = document.getElementById("countySel"),
+        stateSel = document.getElementById("stateSel");
+
+    for (var country in stateObject) {
+
+    countySel.options[countySel.options.length] = new Option(country, country);
+
+  }
+
+countySel.onchange = function () {
+
+    stateSel.length = 1; // remove all options bar first
+    if (this.selectedIndex < 1) 
+    return; // done 
+        
+    // console.log(countySel.value);
+
+    var countryValue = countySel.value;
+
+    $.ajaxSetup({
+                  headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                  }
+                });
+     $.ajax({
+        type:'POST',
+        url:"{{ route('update_admin_country') }}",
+        data:{'country':countryValue},
+        success:function(data){
+
+            swal({
+                      title: "Good job!",
+                      text: "Country Updated Successfully",
+                      icon: "success",
+                      button: "Ok",
+                    });
+        }
+    });
+
+    for (var state in stateObject[this.value]) {
+
+    stateSel.options[stateSel.options.length] = new Option(state, state);
+
+
+}
+
+}
+
+countySel.onchange(); // reset in case page is reloaded
+  
+    stateSel.onchange = function () {
+    if (this.selectedIndex < 1) 
+
+    return; // done
+
+    // console.log(stateSel.value); 
+
+    var stateValue = stateSel.value;
+
+    $.ajaxSetup({
+                  headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                  }
+                });
+     $.ajax({
+        type:'POST',
+        url:"{{ route('update_admin_state') }}",
+        data:{'state':stateValue},
+        success:function(data){
+            swal({
+                      title: "Good job!",
+                      text: "City updated Successfully",
+                      icon: "success",
+                      button: "Ok",
+                    });
+        }
+    });
+
+
+}
+
+});
+</script>
 
 
 <script>

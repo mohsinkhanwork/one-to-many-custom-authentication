@@ -21,21 +21,6 @@
                                 @endif
                             </div>
 
-                            <div class="form-group mb-3">
-                                
-                                <select name="country" id="countySel" size="1" class="form-control">
-                                <option value="" selected="selected">Select Country</option>
-                                </select>
-                  
-                            </div>
-
-                             <div class="form-group mb-3">
-
-                            <select name="state" id="stateSel" size="1" class="form-control">
-                            <option value="" selected="selected">Please select Country first</option>
-                            </select>
-                   
-                            </div>
 
                             <div class="form-group mb-3">
                                 <input type="email" placeholder="Email" id="email_address" class="form-control"
@@ -55,7 +40,7 @@
 
                             <div class="form-group mb-3">
                                 <div class="checkbox">
-                                    <label><input type="checkbox" name="remember"> Remember Me</label>
+                                    <label><input type="checkbox" name="remember"> Remember Me </label>
                                 </div>
                             </div>
                             
@@ -151,67 +136,6 @@ $('#custom_register').on('submit', function(e) {
 });
 
 </script>
-
-<script>
-var stateObject = {
-"India": { 
-            "Delhi": [],
-            "Kerala": [],
-            "Goa" : [],
-},
-
-"Pakistan": {
-            
-            "Peshawar": [],
-            "pindi": [],
-}, 
-
-
-}
- $(document).ready(function () {
-
-    var countySel = document.getElementById("countySel"),
-        stateSel = document.getElementById("stateSel");
-
-    for (var country in stateObject) {
-
-    countySel.options[countySel.options.length] = new Option(country, country);
-
-  }
-
-countySel.onchange = function () {
-
-    stateSel.length = 1; // remove all options bar first
-    if (this.selectedIndex < 1) 
-    return; // done 
-        
-    console.log(countySel.value);
-
-    for (var state in stateObject[this.value]) {
-
-    stateSel.options[stateSel.options.length] = new Option(state, state);
-
-
-}
-
-}
-
-countySel.onchange(); // reset in case page is reloaded
-  
-    stateSel.onchange = function () {
-    if (this.selectedIndex < 1) 
-
-    return; // done
-
-    console.log(stateSel.value); 
-
-
-}
-
-});
-</script>
-
-
 
 
 @endsection
