@@ -51,6 +51,10 @@ Route::delete('delete_party/{id}','PartyController@deleteParty');
 Route::get('/publish_party/', 'PartyController@publish')->name('publish');
 
 
+
+Route::get('/search_party_name/{name}', 'PartyController@search_party_name')->name('search_party_name');
+
+
 });
 
 //

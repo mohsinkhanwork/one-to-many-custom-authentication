@@ -11,7 +11,7 @@ class Party extends Model
     use HasFactory;
 
 
-     protected $fillable = ['name', 'party_logo'];
+     protected $fillable = ['name', 'party_logo', 'slug'];
 
 
      public function candidate() {

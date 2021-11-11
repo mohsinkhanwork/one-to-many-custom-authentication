@@ -16,6 +16,7 @@ class CreatePartiesTable extends Migration
         Schema::create('parties', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('slug')->nullable();
             $table->string('party_logo')->nullable();
             $table->string('party_leader')->nullable();
             // $table->string('publish')->nullable();

@@ -60,7 +60,7 @@
 
                          <div class="form-group mb-3">
                                 
-                                <select name="country" id="countySel" size="1" class="form-control">
+                                <select name="country" id="countySel" size="1">
                                 <option value="" selected="selected">Select Country</option>
                                 </select>
                   
@@ -68,11 +68,32 @@
 
                              <div class="form-group mb-3">
 
-                            <select name="state" id="stateSel" size="1" class="form-control">
+                            <select name="state" id="stateSel" size="1" >
                             <option value="" selected="selected">Please select Country first</option>
                             </select>
                    
                             </div>
+                             <br>
+                            <br>
+                            <br>
+
+                            <div class="row">
+
+<input type="text" list="browsers" id="myBrowser" style="width: 100%; height: 48px; padding: 0 !important;" name="myBrowser" 
+
+onkeydown = "if (event.keyCode == 13)
+                    window.location= '/search_party_name/' + this.value"/>
+                                        <datalist id="browsers">
+                                        @foreach($parties as $party)
+                                          <option value="{{$party->name}}"> 
+                                        @endforeach
+                                        </datalist>
+                                
+                            </div>
+
+                            <br>
+                            <br>
+                            <br>
 
 
 <table class="table table-sm">

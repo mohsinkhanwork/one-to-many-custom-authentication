@@ -73,6 +73,7 @@ class PartyController extends Controller
         
         $party = new Party;
         $party->name = $request->name;
+        $party->slug = str_slug($request->name);
         $party->party_logo = $input['party_logo'];
         $party->party_leader = $request->party_leader;
         
@@ -102,6 +103,26 @@ class PartyController extends Controller
         // dd($party);
         return view('politicalParty.show', compact('party'));
     }
+
+    public function search_party_name(Request $request)
+    {   
+      
+        $party = Party::query()->where('name', $request->name)->first();
+
+        if($party == null) {
+
+            abort(404);
+            // dd('abort');
+        } else {
+
+        return view('politicalParty.show', compact('party'));
+            // dd('sucess');
+        }
+
+        // dd($party);
+    }
+
+    
 
     /**
      * Show the form for editing the specified resource.
