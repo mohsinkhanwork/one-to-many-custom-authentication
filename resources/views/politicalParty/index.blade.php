@@ -81,13 +81,31 @@
 
 <input type="text" list="browsers" id="myBrowser" style="width: 100%; height: 48px; padding: 0 !important;" name="myBrowser" 
 
-onkeydown = "if (event.keyCode == 13)
-                    window.location= '/search_party_name/' + this.value"/>
+onkeydown = "if (event.keyCode == 13) window.location= '/search_party_name/' + this.value"/>
+                                     
                                         <datalist id="browsers">
                                         @foreach($parties as $party)
                                           <option value="{{$party->name}}"> 
                                         @endforeach
                                         </datalist>
+                                
+                            </div>
+
+                            <div>
+
+                        <button onclick="searchfunc()" class="btn btn-primary">search</button>
+                                
+           <script type="text/javascript">
+                    function searchfunc() {
+                             var searchfunc1 =  $("[list='browsers']").val();
+
+                             // console.log(searchfunc1);
+
+                                window.location =  '/search_party_name/' + searchfunc1 
+                              
+                            
+                            }
+           </script>
                                 
                             </div>
 
