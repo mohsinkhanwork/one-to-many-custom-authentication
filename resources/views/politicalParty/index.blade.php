@@ -175,6 +175,50 @@ onkeydown = "if (event.keyCode == 13) window.location= '/search_party_name/' + t
 
 </table>
 
+<div class="container mt-5">
+    <h2 class="mb-4">Admin User Data</h2>
+    <table class="table table-bordered yajra-datatable">
+        <thead>
+            <tr>
+                
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>role</th>
+                <th>country</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    
+    var table = $('.yajra-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('students.list') }}",
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'role', name: 'role'},
+            {data: 'country', name: 'country'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]
+    });
+    
+  });
+</script>
+
 
 <script type="text/javascript">
     

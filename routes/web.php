@@ -33,6 +33,7 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 Route::post('update_admin_country', [CustomAuthController::class, 'update_admin_country'])->name('update_admin_country');
 Route::post('update_admin_state', [CustomAuthController::class, 'update_admin_state'])->name('update_admin_state');
 
+Route::get('user/list', [CustomAuthController::class, 'getUsers'])->name('students.list');
 
 
 
