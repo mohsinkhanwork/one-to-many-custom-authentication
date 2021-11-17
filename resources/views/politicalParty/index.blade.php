@@ -176,7 +176,7 @@ onkeydown = "if (event.keyCode == 13) window.location= '/search_party_name/' + t
 </table>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Admin User Data</h2>
+    <h2 class="mb-4">All Users List</h2>
     <table class="table table-bordered yajra-datatable">
         <thead>
             <tr>
@@ -186,6 +186,7 @@ onkeydown = "if (event.keyCode == 13) window.location= '/search_party_name/' + t
                 <th>Email</th>
                 <th>role</th>
                 <th>country</th>
+                <th>State</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -207,6 +208,7 @@ onkeydown = "if (event.keyCode == 13) window.location= '/search_party_name/' + t
             {data: 'email', name: 'email'},
             {data: 'role', name: 'role'},
             {data: 'country', name: 'country'},
+            {data: 'state', name: 'state'},
             {
                 data: 'action', 
                 name: 'action', 
